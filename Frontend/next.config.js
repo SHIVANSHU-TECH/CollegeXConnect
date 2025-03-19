@@ -1,5 +1,13 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  async rewrites() {
+    return [
+      {
+        source: '/api/suggest',  // Local proxy endpoint
+        destination: 'https://script.google.com/macros/s/AKfycbyK9sH0Ztag3Dakoq4lIa4mSEqtYGPIXf6EiwtcQShTrGns-Ssuf0cA-rsEd58IHjBp/exec', // Google Script URL
+      },
+    ];
+  },
   images: {
     remotePatterns: [
       {

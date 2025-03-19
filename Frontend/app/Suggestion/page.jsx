@@ -20,7 +20,7 @@ export default function SuggestPage() {
     e.preventDefault();
     try {
       await fetch(
-        "https://script.google.com/macros/s/AKfycbwFuIS_OSrGBV7p-wUtTHbFnW7ngrJeYPrzerVUPOSBazJYmxA97gBqhcPhAYhVT9qM/exec",
+        "/api/suggest",
         {
           method: "POST",
           body: JSON.stringify(formData),
