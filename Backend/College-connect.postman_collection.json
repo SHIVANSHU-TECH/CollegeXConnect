@@ -1,0 +1,1756 @@
+{
+	"info": {
+		"_postman_id": "226d3d41-4f78-4832-b8fd-114284e3b1b3",
+		"name": "College-connect",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12966507"
+	},
+	"item": [
+		{
+			"name": "Events",
+			"item": [
+				{
+					"name": "Create event",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var template = `",
+									"<div>",
+									"    <p>Success: {{response.success}}</p>",
+									"    <p>Message: {{response.message}}</p>",
+									"</div>",
+									"`;",
+									"",
+									"function constructVisualizerPayload() {",
+									"    return {response: pm.response.json()};",
+									"}",
+									"",
+									"pm.visualizer.set(template, constructVisualizerPayload());"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"function getEventCategory(){\r",
+									"    const category = [\"CULTURAL\", \"TECHNICHAL\"]\r",
+									"    return category[Math.floor(Math.random() * category.length)]\r",
+									"}\r",
+									"\r",
+									"const randomCat = getEventCategory()\r",
+									"\r",
+									"pm.environment.set(\"randomCategory\", randomCat)\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "someting",
+									"type": "text"
+								},
+								{
+									"key": "media",
+									"type": "file",
+									"src": "/F:/projects/bharatshakti/src/assets/Images/Sliders/Transparency/3.webp"
+								},
+								{
+									"key": "deadlineDate",
+									"value": "{{$isoTimestamp}}",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "descriptions",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "{{randomCategory}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/events",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"events"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create event example",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "title",
+											"value": "someting",
+											"type": "text"
+										},
+										{
+											"key": "media",
+											"type": "file",
+											"src": "/F:/projects/bharatshakti/src/assets/Images/Sliders/Transparency/3.webp"
+										},
+										{
+											"key": "deadlineDate",
+											"value": "{{$isoTimestamp}}",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "descriptions",
+											"type": "text"
+										},
+										{
+											"key": "category",
+											"value": "{{randomCategory}}",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URL}}/events",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"events"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "373"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"175-Pi7dOyzONrQ067tUhZaITPpe/BI\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 13 Apr 2024 14:16:43 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Event created successfully\",\n    \"data\": {\n        \"title\": \"someting\",\n        \"deadlineDate\": \"2024-04-13T14:16:41.792Z\",\n        \"description\": \"descriptions\",\n        \"category\": \"CULTURAL\",\n        \"mediaUrl\": \"https://res.cloudinary.com/rajkavankar/image/upload/v1713017802/xs2t9ccw3aix6j4zeivz.webp\",\n        \"mediaKey\": \"xs2t9ccw3aix6j4zeivz\",\n        \"status\": \"PENDING\",\n        \"_id\": \"661a93cb348e4ce5258eacc7\",\n        \"__v\": 0\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get all events",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/events",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"events"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get all events example",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/events",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"events"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "669"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"29d-oyynUbOVOpiCjNtLqNKmazkBPJc\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 13 Apr 2024 10:26:43 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"All events\",\n    \"data\": [\n        {\n            \"_id\": \"6617d3c9040600410a3269f4\",\n            \"title\": \"someting\",\n            \"deadlineDate\": \"2024-04-11T12:12:55.482Z\",\n            \"description\": \"descriptions\",\n            \"category\": \"category\",\n            \"mediaUrl\": \"https://res.cloudinary.com/rajkavankar/image/upload/v1712837577/p1mueclvuuoku4tl9zlu.jpg\",\n            \"mediaKey\": \"p1mueclvuuoku4tl9zlu\",\n            \"status\": \"PENDING\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"661a5d6d654e105f9401e61e\",\n            \"title\": \"someting\",\n            \"deadlineDate\": \"2024-04-13T10:24:43.524Z\",\n            \"description\": \"descriptions\",\n            \"category\": \"category\",\n            \"mediaUrl\": \"https://res.cloudinary.com/rajkavankar/image/upload/v1713003884/rwx27cs0huumoyrgyaij.webp\",\n            \"mediaKey\": \"rwx27cs0huumoyrgyaij\",\n            \"status\": \"PENDING\",\n            \"__v\": 0\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Get single event",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/events/6617d3c9040600410a3269f4",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"events",
+								"6617d3c9040600410a3269f4"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get single event example",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/events/6617d3c9040600410a3269f4",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"events",
+										"6617d3c9040600410a3269f4"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "358"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"166-15IWwfjF68tLFYX5cG2W4Xnbbvo\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 13 Apr 2024 10:27:32 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Single event\",\n    \"data\": {\n        \"_id\": \"6617d3c9040600410a3269f4\",\n        \"title\": \"someting\",\n        \"deadlineDate\": \"2024-04-11T12:12:55.482Z\",\n        \"description\": \"descriptions\",\n        \"category\": \"category\",\n        \"mediaUrl\": \"https://res.cloudinary.com/rajkavankar/image/upload/v1712837577/p1mueclvuuoku4tl9zlu.jpg\",\n        \"mediaKey\": \"p1mueclvuuoku4tl9zlu\",\n        \"status\": \"PENDING\",\n        \"__v\": 0\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get event by category",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "category",
+									"value": "CULTURAL",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/events/category",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"events",
+								"category"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get event by category example",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "category",
+											"value": "CULTURAL",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URL}}/events/category",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"events",
+										"category"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "682"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2aa-5dY1EgcgyBd1SzfoeRBRZHB53Ek\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 13 Apr 2024 14:32:10 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"All events by category\",\n    \"data\": [\n        {\n            \"_id\": \"661a93b3348e4ce5258eacc5\",\n            \"title\": \"someting\",\n            \"deadlineDate\": \"2024-04-13T14:16:18.202Z\",\n            \"description\": \"descriptions\",\n            \"category\": \"CULTURAL\",\n            \"mediaUrl\": \"https://res.cloudinary.com/rajkavankar/image/upload/v1713017778/ssojib8ddb6hhypoej08.webp\",\n            \"mediaKey\": \"ssojib8ddb6hhypoej08\",\n            \"status\": \"PENDING\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"661a93cb348e4ce5258eacc7\",\n            \"title\": \"someting\",\n            \"deadlineDate\": \"2024-04-13T14:16:41.792Z\",\n            \"description\": \"descriptions\",\n            \"category\": \"CULTURAL\",\n            \"mediaUrl\": \"https://res.cloudinary.com/rajkavankar/image/upload/v1713017802/xs2t9ccw3aix6j4zeivz.webp\",\n            \"mediaKey\": \"xs2t9ccw3aix6j4zeivz\",\n            \"status\": \"PENDING\",\n            \"__v\": 0\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Get events by status",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "status",
+									"value": "VERIFIED",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/events/status",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"events",
+								"status"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get events by status example",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "status",
+											"value": "VERIFIED",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URL}}/events/status",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"events",
+										"status"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "370"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"172-OyMxfZTLMG2D0D3KfCX18e17x+s\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 13 Apr 2024 16:10:00 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"All events by status\",\n    \"data\": [\n        {\n            \"_id\": \"661a93b3348e4ce5258eacc5\",\n            \"title\": \"someting\",\n            \"deadlineDate\": \"2024-04-13T14:16:18.202Z\",\n            \"description\": \"descriptions\",\n            \"category\": \"CULTURAL\",\n            \"mediaUrl\": \"https://res.cloudinary.com/rajkavankar/image/upload/v1713017778/ssojib8ddb6hhypoej08.webp\",\n            \"mediaKey\": \"ssojib8ddb6hhypoej08\",\n            \"status\": \"VERIFIED\",\n            \"__v\": 0\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Update an event",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "status",
+									"value": "VERIFIED",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/events/661a93b3348e4ce5258eacc5",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"events",
+								"661a93b3348e4ce5258eacc5"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update an event example",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "status",
+											"value": "VERIFIED",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URL}}/events/661a93b3348e4ce5258eacc5",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"events",
+										"661a93b3348e4ce5258eacc5"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "361"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"169-XHNDGucVWj1Df1ZxW19v9EZvi6E\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 13 Apr 2024 16:09:04 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Event updated\",\n    \"data\": {\n        \"_id\": \"661a93b3348e4ce5258eacc5\",\n        \"title\": \"someting\",\n        \"deadlineDate\": \"2024-04-13T14:16:18.202Z\",\n        \"description\": \"descriptions\",\n        \"category\": \"CULTURAL\",\n        \"mediaUrl\": \"https://res.cloudinary.com/rajkavankar/image/upload/v1713017778/ssojib8ddb6hhypoej08.webp\",\n        \"mediaKey\": \"ssojib8ddb6hhypoej08\",\n        \"status\": \"VERIFIED\",\n        \"__v\": 0\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete an event",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/events/661a93cb348e4ce5258eacc7",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"events",
+								"661a93cb348e4ce5258eacc7"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "New Request example",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/events/661a93cb348e4ce5258eacc7",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"events",
+										"661a93cb348e4ce5258eacc7"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "42"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"2a-VhXBGBk3EyHQO5rKdsTZI+VHrM0\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 13 Apr 2024 16:12:04 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Event deleted\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Opportunities",
+			"item": [
+				{
+					"name": "Create job",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "job title",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "random description",
+									"type": "text"
+								},
+								{
+									"key": "deadlineDate",
+									"value": "{{$isoTimestamp}}",
+									"type": "text"
+								},
+								{
+									"key": "companyName",
+									"value": "{{$randomCompanyName}}",
+									"type": "text"
+								},
+								{
+									"key": "type",
+									"value": "FULLTIME",
+									"type": "text"
+								},
+								{
+									"key": "link",
+									"value": "link",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/jobs",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"jobs"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create job example",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "title",
+											"value": "job title",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "random description",
+											"type": "text"
+										},
+										{
+											"key": "deadlineDate",
+											"value": "{{$isoTimestamp}}",
+											"type": "text"
+										},
+										{
+											"key": "companyName",
+											"value": "{{$randomCompanyName}}",
+											"type": "text"
+										},
+										{
+											"key": "type",
+											"value": "FULLTIME",
+											"type": "text"
+										},
+										{
+											"key": "link",
+											"value": "link",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URL}}/jobs",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"jobs"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "365"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"16d-+BJkCsDBPRl4aAPBkvKbt6QGM5c\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 13 Apr 2024 18:00:36 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Job created successfully\",\n    \"data\": {\n        \"title\": \"job title\",\n        \"companyName\": \"Ziemann - Schneider\",\n        \"deadlineDate\": \"2024-04-13T18:00:36.705Z\",\n        \"description\": \"random description\",\n        \"link\": \"link\",\n        \"type\": \"FULLTIME\",\n        \"status\": \"PENDING\",\n        \"_id\": \"661ac844b6a75aea722c2012\",\n        \"createdAt\": \"2024-04-13T18:00:36.778Z\",\n        \"updatedAt\": \"2024-04-13T18:00:36.778Z\",\n        \"__v\": 0\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get all jobs",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/jobs",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"jobs"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get all jobs example",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/jobs",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"jobs"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "955"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3bb-JRLkI0jpdX7Z+kBW+IHiRS1XRlg\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 13 Apr 2024 18:02:06 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"All jobs\",\n    \"data\": [\n        {\n            \"_id\": \"661ac81db6a75aea722c200e\",\n            \"title\": \"job title\",\n            \"companyName\": \"Homenick - Okuneva\",\n            \"deadlineDate\": \"2024-04-13T17:59:57.602Z\",\n            \"description\": \"random description\",\n            \"link\": \"link\",\n            \"type\": \"FULLTIME\",\n            \"status\": \"PENDING\",\n            \"createdAt\": \"2024-04-13T17:59:57.698Z\",\n            \"updatedAt\": \"2024-04-13T17:59:57.698Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"661ac83bb6a75aea722c2010\",\n            \"title\": \"job title\",\n            \"companyName\": \"Koch - Ullrich\",\n            \"deadlineDate\": \"2024-04-13T18:00:27.951Z\",\n            \"description\": \"random description\",\n            \"link\": \"link\",\n            \"type\": \"FULLTIME\",\n            \"status\": \"PENDING\",\n            \"createdAt\": \"2024-04-13T18:00:27.969Z\",\n            \"updatedAt\": \"2024-04-13T18:00:27.969Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"661ac844b6a75aea722c2012\",\n            \"title\": \"job title\",\n            \"companyName\": \"Ziemann - Schneider\",\n            \"deadlineDate\": \"2024-04-13T18:00:36.705Z\",\n            \"description\": \"random description\",\n            \"link\": \"link\",\n            \"type\": \"FULLTIME\",\n            \"status\": \"PENDING\",\n            \"createdAt\": \"2024-04-13T18:00:36.778Z\",\n            \"updatedAt\": \"2024-04-13T18:00:36.778Z\",\n            \"__v\": 0\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Get single job",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/jobs/661ac844b6a75aea722c2012",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"jobs",
+								"661ac844b6a75aea722c2012"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get single job example",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/jobs/661ac844b6a75aea722c2012",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"jobs",
+										"661ac844b6a75aea722c2012"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "351"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"15f-rzxuxitTPfj3zmi3SSkU5dkbrFk\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 13 Apr 2024 18:12:39 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Single job\",\n    \"data\": {\n        \"_id\": \"661ac844b6a75aea722c2012\",\n        \"title\": \"job title\",\n        \"companyName\": \"Ziemann - Schneider\",\n        \"deadlineDate\": \"2024-04-13T18:00:36.705Z\",\n        \"description\": \"random description\",\n        \"link\": \"link\",\n        \"type\": \"FULLTIME\",\n        \"status\": \"PENDING\",\n        \"createdAt\": \"2024-04-13T18:00:36.778Z\",\n        \"updatedAt\": \"2024-04-13T18:00:36.778Z\",\n        \"__v\": 0\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get job by type",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "type",
+									"value": "FULLTIME",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/jobs/type",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"jobs",
+								"type"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get job by type example",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "type",
+											"value": "FULLTIME",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URL}}/jobs/type",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"jobs",
+										"type"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "966"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"3c6-vq5ES9yyE0Rfx0gC6AkVTA6XWig\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 13 Apr 2024 18:17:37 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"All events by type\",\n    \"data\": [\n        {\n            \"_id\": \"661ac81db6a75aea722c200e\",\n            \"title\": \"job title\",\n            \"companyName\": \"Homenick - Okuneva\",\n            \"deadlineDate\": \"2024-04-13T17:59:57.602Z\",\n            \"description\": \"random description\",\n            \"link\": \"link\",\n            \"type\": \"FULLTIME\",\n            \"status\": \"PENDING\",\n            \"createdAt\": \"2024-04-13T17:59:57.698Z\",\n            \"updatedAt\": \"2024-04-13T17:59:57.698Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"661ac83bb6a75aea722c2010\",\n            \"title\": \"job title\",\n            \"companyName\": \"Koch - Ullrich\",\n            \"deadlineDate\": \"2024-04-13T18:00:27.951Z\",\n            \"description\": \"random description\",\n            \"link\": \"link\",\n            \"type\": \"FULLTIME\",\n            \"status\": \"PENDING\",\n            \"createdAt\": \"2024-04-13T18:00:27.969Z\",\n            \"updatedAt\": \"2024-04-13T18:00:27.969Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"661ac844b6a75aea722c2012\",\n            \"title\": \"job title\",\n            \"companyName\": \"Ziemann - Schneider\",\n            \"deadlineDate\": \"2024-04-13T18:00:36.705Z\",\n            \"description\": \"random description\",\n            \"link\": \"link\",\n            \"type\": \"FULLTIME\",\n            \"status\": \"VERIFIED\",\n            \"createdAt\": \"2024-04-13T18:00:36.778Z\",\n            \"updatedAt\": \"2024-04-13T18:16:14.535Z\",\n            \"__v\": 0\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Get job by status",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "status",
+									"value": "VERIFIED",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/jobs/status",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"jobs",
+								"status"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get job by status example",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "status",
+											"value": "VERIFIED",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URL}}/jobs/status",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"jobs",
+										"status"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "362"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"16a-nnoQYsWE0n3CJqwOulVAgGEmiLk\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 13 Apr 2024 18:17:02 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"All jobs by status\",\n    \"data\": [\n        {\n            \"_id\": \"661ac844b6a75aea722c2012\",\n            \"title\": \"job title\",\n            \"companyName\": \"Ziemann - Schneider\",\n            \"deadlineDate\": \"2024-04-13T18:00:36.705Z\",\n            \"description\": \"random description\",\n            \"link\": \"link\",\n            \"type\": \"FULLTIME\",\n            \"status\": \"VERIFIED\",\n            \"createdAt\": \"2024-04-13T18:00:36.778Z\",\n            \"updatedAt\": \"2024-04-13T18:16:14.535Z\",\n            \"__v\": 0\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Update job",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "status",
+									"value": "VERIFIED",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/jobs/661ac844b6a75aea722c2012",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"jobs",
+								"661ac844b6a75aea722c2012"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update job example",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "status",
+											"value": "VERIFIED",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URL}}/jobs/661ac844b6a75aea722c2012",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"jobs",
+										"661ac844b6a75aea722c2012"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "353"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"161-iG+RMxwWyeVkARqVj56UxM39P3Y\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 13 Apr 2024 18:16:14 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Job updated\",\n    \"data\": {\n        \"_id\": \"661ac844b6a75aea722c2012\",\n        \"title\": \"job title\",\n        \"companyName\": \"Ziemann - Schneider\",\n        \"deadlineDate\": \"2024-04-13T18:00:36.705Z\",\n        \"description\": \"random description\",\n        \"link\": \"link\",\n        \"type\": \"FULLTIME\",\n        \"status\": \"VERIFIED\",\n        \"createdAt\": \"2024-04-13T18:00:36.778Z\",\n        \"updatedAt\": \"2024-04-13T18:16:14.535Z\",\n        \"__v\": 0\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete a job",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/jobs/661ac81db6a75aea722c200e",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"jobs",
+								"661ac81db6a75aea722c200e"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete job example",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/jobs/661ac81db6a75aea722c200e",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"jobs",
+										"661ac81db6a75aea722c200e"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "40"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"28-Boe1LjIM94VSVXWmgfauP6lCLFs\""
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 13 Apr 2024 18:20:34 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Job deleted\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Notes",
+			"item": [
+				{
+					"name": "Create a note",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "title",
+									"value": "some title",
+									"type": "text"
+								},
+								{
+									"key": "course",
+									"value": "btech",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "random description",
+									"type": "text"
+								},
+								{
+									"key": "semester",
+									"value": "5",
+									"type": "text"
+								},
+								{
+									"key": "subject",
+									"value": "Data structures",
+									"type": "text"
+								},
+								{
+									"key": "notesUrl",
+									"value": "notesurl",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/notes",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"notes"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Create a note example",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "title",
+											"value": "some title",
+											"type": "text"
+										},
+										{
+											"key": "course",
+											"value": "btech",
+											"type": "text"
+										},
+										{
+											"key": "description",
+											"value": "random description",
+											"type": "text"
+										},
+										{
+											"key": "semester",
+											"value": "5",
+											"type": "text"
+										},
+										{
+											"key": "subject",
+											"value": "Maths",
+											"type": "text"
+										},
+										{
+											"key": "notesUrl",
+											"value": "notesurl",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URL}}/notes",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"notes"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "308"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"134-PT1bmOfLplZa5qvGj8JFSQVm80U\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 14 Apr 2024 06:03:47 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Note created successfully\",\n    \"data\": {\n        \"title\": \"some title\",\n        \"description\": \"random description\",\n        \"course\": \"btech\",\n        \"semester\": 5,\n        \"subject\": \"Maths\",\n        \"notesUrl\": \"notesurl\",\n        \"_id\": \"661b71c30aeac1ccc1296bba\",\n        \"createdAt\": \"2024-04-14T06:03:47.124Z\",\n        \"updatedAt\": \"2024-04-14T06:03:47.124Z\",\n        \"__v\": 0\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Get all notes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/notes",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"notes"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Get all notes example",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/notes",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"notes"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "551"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"227-bHvFh6ecgdHhgLPUsAuf+NyhV7s\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 14 Apr 2024 06:10:06 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"All notes\",\n    \"data\": [\n        {\n            \"_id\": \"661b71c30aeac1ccc1296bba\",\n            \"title\": \"some title\",\n            \"description\": \"random description\",\n            \"course\": \"btech\",\n            \"semester\": 5,\n            \"subject\": \"Maths\",\n            \"notesUrl\": \"notesurl\",\n            \"createdAt\": \"2024-04-14T06:03:47.124Z\",\n            \"updatedAt\": \"2024-04-14T06:03:47.124Z\",\n            \"__v\": 0\n        },\n        {\n            \"_id\": \"661b72ec7c4d781a4a0deb74\",\n            \"title\": \"some title\",\n            \"description\": \"random description\",\n            \"course\": \"btech\",\n            \"semester\": 5,\n            \"subject\": \"Data structures\",\n            \"notesUrl\": \"notesurl\",\n            \"createdAt\": \"2024-04-14T06:08:44.406Z\",\n            \"updatedAt\": \"2024-04-14T06:08:44.406Z\",\n            \"__v\": 0\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Update a note",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "semester",
+									"value": "3",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{URL}}/notes/661b72ec7c4d781a4a0deb74",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"notes",
+								"661b72ec7c4d781a4a0deb74"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Update a note example",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "semester",
+											"value": "3",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{URL}}/notes/661b72ec7c4d781a4a0deb74",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"notes",
+										"661b72ec7c4d781a4a0deb74"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "305"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"131-+T2ZnbiwJbEeIoTL5dfm3F0reSg\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 14 Apr 2024 06:11:54 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"note updated\",\n    \"data\": {\n        \"_id\": \"661b72ec7c4d781a4a0deb74\",\n        \"title\": \"some title\",\n        \"description\": \"random description\",\n        \"course\": \"btech\",\n        \"semester\": 3,\n        \"subject\": \"Data structures\",\n        \"notesUrl\": \"notesurl\",\n        \"createdAt\": \"2024-04-14T06:08:44.406Z\",\n        \"updatedAt\": \"2024-04-14T06:11:54.017Z\",\n        \"__v\": 0\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete a note",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{URL}}/notes/661b73eead5bf1b3853bb6cf",
+							"host": [
+								"{{URL}}"
+							],
+							"path": [
+								"notes",
+								"661b73eead5bf1b3853bb6cf"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Delete a note example",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{URL}}/notes/661b73eead5bf1b3853bb6cf",
+									"host": [
+										"{{URL}}"
+									],
+									"path": [
+										"notes",
+										"661b73eead5bf1b3853bb6cf"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "X-Powered-By",
+									"value": "Express"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Content-Length",
+									"value": "41"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"29-LGPE05TqEqqz2opQN4PeUQW1Qg0\""
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 14 Apr 2024 06:13:30 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Keep-Alive",
+									"value": "timeout=5"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"success\": true,\n    \"message\": \"Note deleted\"\n}"
+						}
+					]
+				}
+			]
+		}
+	]
+}
