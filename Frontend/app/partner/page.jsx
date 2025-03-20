@@ -78,7 +78,7 @@ export default function PartnersPage() {
         className="max-w-5xl mx-auto text-center bg-white rounded-3xl shadow-2xl p-8 sm:p-12 font-['Playfair_Display']"
       >
         <h2 className="text-3xl sm:text-4xl font-bold mb-6 text-gray-800 tracking-wider">Looking to Collaborate or Invest?</h2>
-        <p className="text-lg sm:text-xl text-gray-700 mb-8 leading-relaxed text-justify font-['Raleway']">
+        <p className="text-lg sm:text-xl text-gray-700 mb-8 leading-relaxed text-left font-['Raleway']">
           Join us in revolutionizing student networking, opportunities, and learning experiences. 
           We're open to partnerships, collaborations, sponsorships, and funding. Let’s build the future together!
         </p>
