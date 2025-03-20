@@ -35,7 +35,7 @@ export default function Career() {
   const filteredJobs = filter === "All" ? jobs : jobs.filter((job) => job.type.includes(filter));
 
   return (
-    <div className="bg-gradient-to-br from-white via-gray-50 to-gray-100 min-h-screen px-6 sm:px-12 lg:px-28 py-16 font-sans">
+    <div className="bg-gradient-to-br from-white via-gray-50 to-gray-100 min-h-screen px-6 sm:px-16 lg:px-28 py-16 pt-28 font-sans">
       {/* Hero Section */}
       <div className="text-center mb-16">
         <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-700 via-purple-700 to-pink-600 mb-6">
