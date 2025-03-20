@@ -5,16 +5,16 @@ import Link from "next/link";
 
 export default function WhyCollegeX() {
   return (
-    <div className="bg-gradient-to-br from-white via-gray-50 to-gray-100 min-h-screen p-24 sm:p-24 md:p-24 lg:p-24 font-sans">
-      {/* Hero Section */}
-      <div className="text-center mb-10 md:mb-16">
-        <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-700 via-purple-700 to-pink-600 mb-6 tracking-tight leading-tight font-serif">
-          Why Choose CollegeX Connect?
-        </h1>
-        <p className="text-gray-700 text-base sm:text-lg md:text-xl lg:text-2xl max-w-5xl mx-auto leading-relaxed tracking-wide font-medium">
-          It’s not just a platform — it’s a movement to empower, uplift, and connect the next generation of students, educators, and professionals.
-        </p>
-      </div>
+    <div className="bg-gradient-to-br from-white via-gray-50 to-gray-100 min-h-screen p-6 sm:p-8 md:p-12 lg:p-20 font-sans pt-24">
+    {/* Hero Section */}
+    <div className="text-center mb-10 md:mb-16">
+      <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-700 via-purple-700 to-pink-600 mb-6 tracking-tight leading-tight font-serif">
+        Why Choose CollegeX Connect?
+      </h1>
+      <p className="text-gray-700 text-base sm:text-lg md:text-xl lg:text-2xl max-w-5xl mx-auto leading-relaxed tracking-wide font-medium">
+        It’s not just a platform — it’s a movement to empower, uplift, and connect the next generation of students, educators, and professionals.
+      </p>
+    </div>
 
       {/* Feature Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-12 md:mb-20">
