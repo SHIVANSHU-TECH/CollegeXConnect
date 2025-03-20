@@ -31,6 +31,58 @@ const jobs = [
 export default function Career() {
   const [selectedJob, setSelectedJob] = useState(null);
   const [filter, setFilter] = useState("All");
+  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [resumeFile, setResumeFile] = useState(null);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+
+  const handleInputChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleFileChange = (e) => {
+    setResumeFile(e.target.files[0]);
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    setSuccessMessage("");
+
+    const formPayload = new FormData();
+    formPayload.append("name", formData.name);
+    formPayload.append("email", formData.email);
+    formPayload.append("message", formData.message);
+    formPayload.append("jobTitle", selectedJob?.title || "N/A");
+    if (resumeFile) {
+      formPayload.append("resume", resumeFile, resumeFile.name);
+    }
+  
+
+    try {
+      const response = await fetch(
+        "https://script.google.com/macros/s/AKfycbzKuQsfyiA70ScdFiHpHRs_uMKzifp60xv9ZDF2GP1GNNBXCpcL2wIDdz40zEr74bQ/exec",
+        {
+          method: "POST",
+          body: formPayload,
+        }
+      );
+
+      if (response.ok) {
+        setSuccessMessage("🎉 Application Submitted Successfully!");
+        setFormData({ name: "", email: "", message: "" });
+        setResumeFile(null);
+        setTimeout(() => setSelectedJob(null), 2000);
+      } else {
+        setSuccessMessage("❌ Failed to submit. Please try again!");
+      }
+    } catch (error) {
+      setSuccessMessage("❌ Something went wrong. Please try again!");
+      console.error(error);
+    }
+
+    setIsSubmitting(false);
+  };
 
   const filteredJobs = filter === "All" ? jobs : jobs.filter((job) => job.type.includes(filter));
 
@@ -58,10 +110,7 @@ export default function Career() {
           { title: "🤝 Open Culture", color: "text-purple-700", desc: "A collaborative, transparent, and inclusive workspace where every voice matters." },
           { title: "💡 Real Impact", color: "text-pink-700", desc: "Create solutions that shape the learning journey of thousands of students." },
         ].map((item, index) => (
-          <div
-            key={index}
-            className="bg-white rounded-2xl shadow-lg p-8 hover:scale-105 hover:shadow-2xl transition duration-300"
-          >
+          <div key={index} className="bg-white rounded-2xl shadow-lg p-8 hover:scale-105 hover:shadow-2xl transition duration-300">
             <h3 className={`text-2xl font-semibold mb-4 ${item.color}`}>{item.title}</h3>
             <p className="text-gray-600 text-lg">{item.desc}</p>
           </div>
@@ -74,9 +123,7 @@ export default function Career() {
           <button
             key={option}
             onClick={() => setFilter(option)}
-            className={`px-5 py-3 rounded-full border ${
-              filter === option ? "bg-blue-600 text-white" : "bg-white text-gray-700 border-gray-300"
-            } hover:bg-blue-600 hover:text-white transition`}
+            className={`px-5 py-3 rounded-full border ${filter === option ? "bg-blue-600 text-white" : "bg-white text-gray-700 border-gray-300"} hover:bg-blue-600 hover:text-white transition`}
           >
             {option}
           </button>
@@ -88,11 +135,7 @@ export default function Career() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
         {filteredJobs.map((job) => (
-          <motion.div
-            key={job.id}
-            whileHover={{ scale: 1.03 }}
-            className="bg-white rounded-3xl shadow-lg p-8 border border-gray-200 hover:shadow-2xl transition duration-300"
-          >
+          <motion.div key={job.id} whileHover={{ scale: 1.03 }} className="bg-white rounded-3xl shadow-lg p-8 border border-gray-200 hover:shadow-2xl transition duration-300">
             <h3 className="text-2xl font-semibold mb-4 text-blue-700">{job.title}</h3>
             <p className="text-gray-600 mb-6 text-lg">{job.description}</p>
             <div className="flex flex-wrap items-center justify-between text-sm text-gray-500 mb-6">
@@ -114,14 +157,61 @@ export default function Career() {
         <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50 px-4">
           <div className="bg-white p-8 sm:p-10 rounded-2xl shadow-2xl w-full max-w-lg">
             <h3 className="text-2xl font-bold mb-4">Apply for {selectedJob.title}</h3>
-            <form className="space-y-4">
-              <input type="text" placeholder="Your Name" className="w-full border p-3 rounded-lg bg-white" required />
-              <input type="email" placeholder="Your Email" className="w-full border p-3 rounded-lg bg-white" required />
-              <textarea placeholder="Cover Letter / Message" className="w-full border p-3 rounded-lg bg-white" rows="4" required></textarea>
-              <input type="file" className="w-full border p-3 rounded-lg" />
+            <form className="space-y-4" onSubmit={handleSubmit} encType="multipart/form-data">
+              <input
+                type="text"
+                name="name"
+                placeholder="Your Name"
+                className="w-full border p-3 rounded-lg bg-white"
+                required
+                value={formData.name}
+                onChange={handleInputChange}
+              />
+              <input
+                type="email"
+                name="email"
+                placeholder="Your Email"
+                className="w-full border p-3 rounded-lg bg-white"
+                required
+                value={formData.email}
+                onChange={handleInputChange}
+              />
+              <textarea
+                name="message"
+                placeholder="Cover Letter / Message"
+                className="w-full border p-3 rounded-lg bg-white"
+                rows="4"
+                required
+                value={formData.message}
+                onChange={handleInputChange}
+              ></textarea>
+              {/* Resume upload */}
+              <input
+                type="file"
+                name="resume"
+                className="w-full border p-3 rounded-lg"
+                accept=".pdf,.doc,.docx"
+                onChange={handleFileChange}
+                required
+              />
+
+              {successMessage && <p className="text-green-600">{successMessage}</p>}
+
               <div className="flex flex-col sm:flex-row justify-between mt-6 gap-4">
-                <button type="submit" className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 w-full sm:w-auto">Submit</button>
-                <button type="button" onClick={() => setSelectedJob(null)} className="text-gray-600 hover:underline w-full sm:w-auto">Cancel</button>
+                <button
+                  type="submit"
+                  className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 w-full sm:w-auto"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? "Submitting..." : "Submit"}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setSelectedJob(null)}
+                  className="text-gray-600 hover:underline w-full sm:w-auto"
+                >
+                  Cancel
+                </button>
               </div>
             </form>
           </div>
