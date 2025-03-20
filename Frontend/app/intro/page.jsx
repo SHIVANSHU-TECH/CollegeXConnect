@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function WhyCollegeX() {
   return (
-    <div className="bg-gradient-to-br from-white via-gray-50 to-gray-100 min-h-screen p-6 sm:p-8 md:p-12 lg:p-20 font-sans pt-28">
+    <div className="bg-gradient-to-br from-white via-gray-50 to-gray-100 min-h-screen p-6 sm:p-8 md:p-12 lg:p-24 font-sans pt-28">
     {/* Hero Section */}
     <div className="text-center mb-10 md:mb-16">
       <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-700 via-purple-700 to-pink-600 mb-6 tracking-tight leading-tight font-serif">
