@@ -49,7 +49,7 @@ export default function Leadership() {
         Meet Our Leaders
       </h1>
 
-      <p className="text-center text-gray-700 max-w-3xl mx-auto text-base md:text-lg mb-16">
+      <p className="text-justify text-gray-700 max-w-3xl mx-auto text-base md:text-lg mb-16">
         At <span className="font-semibold text-blue-600">CollegeX Connect</span>, leadership is not just about titles, it’s about inspiring change, building communities, and leading with vision. Our leaders represent a perfect blend of passion, skills, and creativity that drives our mission forward.
       </p>
 
