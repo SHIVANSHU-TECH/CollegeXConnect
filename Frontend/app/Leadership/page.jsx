@@ -1,7 +1,9 @@
 "use client";
 
+// import { Link } from "lucide-react";
 import { useState } from "react";
 import { FaLinkedin, FaTwitter, FaInstagram } from "react-icons/fa";
+import Link from "next/link";
 
 const founders = [
   {
@@ -114,12 +116,12 @@ export default function Leadership() {
         </p>
 
         <div className="mt-8">
-          <a 
-            href="#"
+          <Link 
+            href="/"
             className="inline-block px-8 py-4 text-white text-lg font-semibold rounded-full bg-gradient-to-r from-blue-600 to-purple-600 shadow-lg hover:scale-105 hover:shadow-2xl transition duration-500"
           >
             Join the Movement 🚀
-          </a>
+          </Link>
         </div>
       </div>
     </div>
