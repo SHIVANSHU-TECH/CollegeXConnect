@@ -5,7 +5,7 @@ import Link from "next/link";
 
 export default function WhyCollegeX() {
   return (
-    <div className="bg-gradient-to-br from-white via-gray-50 to-gray-100 min-h-screen p-24 sm:p-24 md:p-24 lg:p-32 font-sans">
+    <div className="bg-gradient-to-br from-white via-gray-50 to-gray-100 min-h-screen p-6 sm:p-12 md:p-20 lg:p-32 font-sans">
       {/* Hero Section */}
       <div className="text-center mb-8 sm:mb-12 md:mb-16">
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-700 via-purple-700 to-pink-600 mb-4 sm:mb-6 tracking-tight leading-tight font-serif">
@@ -17,7 +17,7 @@ export default function WhyCollegeX() {
       </div>
 
       {/* Sections */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8 md:gap-12 mb-12 sm:mb-16 md:mb-24">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 md:gap-12 mb-12 sm:mb-16 md:mb-24">
         <motion.div
           whileHover={{ scale: 1.05 }}
           className="bg-white rounded-xl sm:rounded-2xl shadow-lg p-6 sm:p-8 border hover:shadow-2xl transition duration-300"
