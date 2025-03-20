@@ -25,6 +25,7 @@ export default function SuggestPage() {
           method: "POST",
           body: JSON.stringify(formData),
           headers: { "Content-Type": "application/json" },
+          mode: "no-cors",
         }
       );
       setSuccess(true);
