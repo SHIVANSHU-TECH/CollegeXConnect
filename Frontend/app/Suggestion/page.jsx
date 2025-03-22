@@ -33,7 +33,7 @@ export default function SuggestPage() {
   };
 
   return (
-    <div className="bg-gradient-to-br from-white via-gray-50 to-gray-100 min-h-screen p-24 sm:p-24 md:p-24 lg:p-28 font-sans">
+    <div className="bg-gradient-to-br from-white via-gray-50 to-gray-100 min-h-screen pt-24 sm:p-24 md:p-24 lg:p-28 font-sans">
       {/* Page Header */}
       <motion.div
         initial={{ opacity: 0, y: -50 }}
