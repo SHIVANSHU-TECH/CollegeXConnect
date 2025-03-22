@@ -183,7 +183,7 @@ const Event = () => {
     <motion.div
       initial={{ scale: 0.8, opacity: 0 }}
       animate={{ scale: 1, opacity: 1 }}
-      className="bg-white rounded-2xl shadow-2xl w-[42%] max-h-[90vh] p-6 relative overflow-y-auto border border-gray-200"
+      className="bg-white rounded-2xl shadow-2xl w-full max-w-[90%] sm:max-w-[85%] md:max-w-[70%] lg:max-w-[50%] xl:max-w-[42%] max-h-[90vh] p-6 relative overflow-y-auto border border-gray-200"
     >
       {/* Close Icon */}
       <button
@@ -244,41 +244,30 @@ const Event = () => {
         />
 
         {/* Custom Uploader Icon */}
-              <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mt-8">
-        {/* Upload Icon */}
-        <label className="flex items-center gap-2 cursor-pointer text-blue-600 hover:text-blue-800">
-          <FiUpload className="text-2xl" />
-          <input
-            type="file"
-            accept="image/*"
-            onChange={handleFileUpload}
-            className="hidden"
-            required
-          />
-          Upload Image
-        </label>
+        <div className="flex flex-col sm:flex-row justify-between items-center gap-4 mt-8">
+          <label className="flex items-center gap-2 cursor-pointer text-blue-600 hover:text-blue-800">
+            <FiUpload className="text-2xl" />
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleFileUpload}
+              className="hidden"
+            />
+            Upload Image
+          </label>
 
-        {/* Action Buttons */}
-        <div className="flex gap-4 w-full sm:w-auto">
           <button
             type="submit"
-            className="bg-green-600 text-white px-6 py-3 rounded-xl hover:bg-green-700 transition duration-300 w-full sm:w-auto"
+            className="bg-green-600 text-white px-8 py-3 rounded-xl hover:bg-green-700 transition duration-300"
           >
-            Submit
-          </button>
-          <button
-            type="button"
-            onClick={() => setShowModal(false)}
-            className="bg-red-600 text-white px-6 py-3 rounded-xl hover:bg-red-700 transition duration-300 w-full sm:w-auto"
-          >
-            Cancel
+            Create Event
           </button>
         </div>
-      </div>
       </form>
     </motion.div>
   </div>
 )}
+
 
 
     </section>
