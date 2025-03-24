@@ -84,7 +84,7 @@ const Resources = () => {
   };
 
   return (
-    <div className="container mx-auto p-6 md:p-16 bg-gray-100 min-h-screen">
+    <div className="container mx-auto p-6 md:p-16 bg-gray-100 md:pt-24 min-h-screen">
       <h1
         className="text-3xl md:text-4xl font-extrabold text-gray-800 text-center tracking-wide 
               uppercase drop-shadow-md mb-8"
@@ -144,7 +144,7 @@ const Resources = () => {
                     </Button>
                   </Link>
                   <Link href={resource.downloadLink} target="_blank">
-                    <Button className="flex items-center gap-2 bg-blue-600 text-white px-8 py-2 rounded-md hover:bg-blue-800 transition">
+                    <Button className="flex items-center gap-2 bg-blue-600 text-white px-7 py-2 rounded-md hover:bg-blue-800 transition">
                       <FaDownload className="text-white text-lg" />
                       <span className="text-sm font-medium">Download</span>
                     </Button>
