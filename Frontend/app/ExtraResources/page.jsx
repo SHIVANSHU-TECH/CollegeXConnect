@@ -84,7 +84,7 @@ const Resources = () => {
   };
 
   return (
-    <div className="container mx-auto sm:pt-24 p-6 md:p-16 bg-gray-100 md:pt-24 min-h-screen">
+    <div className="container mx-auto pt-24 p-6 md:p-16 bg-gray-100 min-h-screen">
       <h1
         className="text-3xl md:text-4xl font-extrabold text-gray-800 text-center tracking-wide 
               uppercase drop-shadow-md mb-8"
