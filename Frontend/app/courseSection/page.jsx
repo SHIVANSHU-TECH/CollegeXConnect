@@ -84,7 +84,7 @@ const Courses = () => {
 
           <button
             onClick={() => setShowModal(true)}
-            className="bg-blue-600 text-white px-6 py-3 rounded-full hover:bg-blue-700 transition whitespace-nowrap"
+            className="bg-blue-600 text-white px-5 py-3 rounded-full hover:bg-blue-700 transition whitespace-nowrap"
           >
             + Add New Course
           </button>
