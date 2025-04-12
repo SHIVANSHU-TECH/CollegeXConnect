@@ -1,7 +1,7 @@
 "use client";
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { ChevronDown, ChevronUp, Plus, X } from "lucide-react";
 
 const categories = ["All", "Technical", "Marketing", "Trading", "Sales", "Design", "Freelancing", "Personal Development"];
 
@@ -35,12 +35,14 @@ const roadmaps = [
   },
 ];
 
+
 const Roadmaps = ({ isLoggedIn }) => {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
   const [previewFile, setPreviewFile] = useState(null);
   const [showTrending, setShowTrending] = useState(false);
   const [showDownloaded, setShowDownloaded] = useState(false);
+  const [showModal, setShowModal] = useState(false);
 
   const filteredRoadmaps = roadmaps.filter((r) =>
     (selectedCategory === "All" || r.category === selectedCategory) &&
@@ -48,10 +50,6 @@ const Roadmaps = ({ isLoggedIn }) => {
       r.description.toLowerCase().includes(searchQuery.toLowerCase()))
   );
 
-  const mostDownloaded = [...roadmaps].sort((a, b) => b.downloads - a.downloads).slice(0, 3);
-  const trending = roadmaps.filter((r) => r.trending);
-
-  // Roadmap card component to avoid repetition
   const RoadmapCard = ({ roadmap }) => (
     <div className="bg-white shadow-xl rounded-xl overflow-hidden hover:shadow-2xl transform hover:-translate-y-2 transition duration-300">
       <div className="p-6 text-left">
@@ -89,15 +87,14 @@ const Roadmaps = ({ isLoggedIn }) => {
   );
 
   return (
-    <section className="bg-gradient-to-tr from-purple-200 via-purple-400 to-indigo-700
- min-h-screen py-28 px-6 font-sans">
+    <section className="bg-gradient-to-tr from-purple-200 via-purple-400 to-indigo-700 min-h-screen py-28 px-4 md:px-6 font-sans">
       <div className="max-w-7xl mx-auto text-center">
-        <h2 className="text-4xl font-extrabold text-white mb-10 font-[cursive] ">
+        <h2 className="text-4xl font-extrabold text-white mb-10 font-[cursive]">
           📚 Skill Learning <span className="text-purple-700">Roadmaps</span>
         </h2>
 
-        {/* Search */}
-        <div className="mb-8 flex justify-center">
+        {/* Search + Create Button */}
+        <div className="mb-8 flex flex-col md:flex-row justify-center items-center gap-4">
           <input
             type="text"
             placeholder="🔎 Search roadmaps..."
@@ -105,6 +102,12 @@ const Roadmaps = ({ isLoggedIn }) => {
             onChange={(e) => setSearchQuery(e.target.value)}
             className="w-full max-w-lg px-7 py-3 border rounded-full shadow bg-white focus:outline-none focus:ring-2 focus:ring-purple-500 text-gray-700"
           />
+          <button
+            onClick={() => setShowModal(true)}
+            className="flex items-center gap-2 px-6 py-3 rounded-full bg-gradient-to-r from-pink-500 via-purple-600 to-indigo-700 text-white font-semibold shadow-lg hover:scale-105 hover:shadow-2xl transition duration-300"
+          >
+            <Plus size={20} /> Create
+          </button>
         </div>
 
         {/* Categories */}
@@ -114,7 +117,9 @@ const Roadmaps = ({ isLoggedIn }) => {
               key={cat}
               onClick={() => setSelectedCategory(cat)}
               className={`px-6 py-2 rounded-full border font-semibold tracking-wide ${
-                selectedCategory === cat ? "bg-purple-700 text-white shadow-lg" : "bg-white text-gray-700 hover:bg-purple-200"
+                selectedCategory === cat
+                  ? "bg-purple-700 text-white shadow-lg"
+                  : "bg-white text-gray-700 hover:bg-purple-200"
               }`}
             >
               {cat}
@@ -122,60 +127,9 @@ const Roadmaps = ({ isLoggedIn }) => {
           ))}
         </div>
 
-        {/* Featured Sections Row */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-          {/* 🔥 Trending Section */}
-          <div className="text-left">
-            <div
-              className="flex justify-between items-center cursor-pointer bg-white p-4 rounded-xl shadow"
-              onClick={() => setShowTrending(!showTrending)}
-            >
-              <h3 className="text-2xl font-poppins font-400 text-gray-800 ">🔥 Trending</h3>
-              {showTrending ? <ChevronUp size={28} /> : <ChevronDown size={28} />}
-            </div>
-
-            {showTrending && (
-              <motion.div
-                initial={{ opacity: 0, y: 50 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                className="space-y-6 mt-6"
-              >
-                {trending.map((roadmap) => (
-                  <RoadmapCard key={roadmap.id} roadmap={roadmap} />
-                ))}
-              </motion.div>
-            )}
-          </div>
-
-          {/* 📈 Most Downloaded Section */}
-          <div className="text-left">
-            <div
-              className="flex justify-between items-center cursor-pointer bg-white p-4 rounded-xl shadow"
-              onClick={() => setShowDownloaded(!showDownloaded)}
-            >
-              <h3 className="text-2xl font-400 text-gray-800">📈 Most Downloaded</h3>
-              {showDownloaded ? <ChevronUp size={28} /> : <ChevronDown size={28} />}
-            </div>
-
-            {showDownloaded && (
-              <motion.div
-                initial={{ opacity: 0, y: 50 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                className="space-y-6 mt-6"
-              >
-                {mostDownloaded.map((roadmap) => (
-                  <RoadmapCard key={roadmap.id} roadmap={roadmap} />
-                ))}
-              </motion.div>
-            )}
-          </div>
-        </div>
-
-        {/* 📜 All Roadmaps */}
-        <h3 className="text-4xl font-600 font-[monospace] text-gray-800 mb-6 ">📜 All Roadmaps</h3>
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        {/* All Roadmaps */}
+        <h3 className="text-4xl font-600 font-[monospace] text-gray-800 mb-6">📜 All Roadmaps</h3>
+        <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {filteredRoadmaps.map((roadmap) => (
             <motion.div
               key={roadmap.id}
@@ -188,7 +142,7 @@ const Roadmaps = ({ isLoggedIn }) => {
           ))}
         </div>
 
-        {/* PDF Preview Modal */}
+        {/* PDF Preview */}
         {previewFile && (
           <motion.div
             initial={{ opacity: 0 }}
@@ -208,6 +162,62 @@ const Roadmaps = ({ isLoggedIn }) => {
               >
                 Close
               </button>
+            </div>
+          </motion.div>
+        )}
+
+        {/* ✨ Gorgeous Modal for Creating Roadmap */}
+        {showModal && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            className="fixed inset-0 bg-black bg-opacity-60 flex justify-center items-center z-50"
+            onClick={() => setShowModal(false)}
+          >
+            <div
+              onClick={(e) => e.stopPropagation()}
+              className="bg-white rounded-2xl shadow-2xl p-8 w-[95%] max-w-xl"
+            >
+              <div className="flex justify-between items-center mb-6">
+                <h3 className="text-2xl font-bold text-purple-700">✨ Add New Roadmap</h3>
+                <button onClick={() => setShowModal(false)} className="text-gray-500 hover:text-red-500">
+                  <X size={28} />
+                </button>
+              </div>
+
+              <form className="space-y-4">
+                <input
+                  type="text"
+                  placeholder="Roadmap Title"
+                  className="w-full p-3 rounded-lg border bg-white border-gray-300 focus:ring-2 focus:ring-purple-500"
+                />
+                <select className="w-full p-3 rounded-lg border bg-white border-gray-300 focus:ring-2 focus:ring-purple-500">
+                  <option>Select Category</option>
+                  {categories
+                    .filter((cat) => cat !== "All")
+                    .map((cat, idx) => (
+                      <option key={idx} value={cat}>
+                        {cat}
+                      </option>
+                    ))}
+                </select>
+                <textarea
+                  placeholder="Description"
+                  className="w-full p-3 rounded-lg border bg-white border-gray-300 focus:ring-2 focus:ring-purple-500"
+                  rows="3"
+                ></textarea>
+                <input
+                  type="file"
+                  className="w-full p-3 rounded-lg border bg-white border-gray-300 focus:ring-2 focus:ring-purple-500"
+                />
+
+                <button
+                  type="submit"
+                  className="w-full bg-purple-700 text-white py-3 rounded-lg hover:bg-purple-800 transition"
+                >
+                  Upload Roadmap 🚀
+                </button>
+              </form>
             </div>
           </motion.div>
         )}
