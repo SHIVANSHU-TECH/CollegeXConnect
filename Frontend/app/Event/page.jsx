@@ -10,7 +10,7 @@ const categories = ["All", "Webinars", "Workshops", "Cultural", "Technical", "Sp
 const EventData = [
   {
     id: 1,
-    title: "ReactJS Webinar",
+    etitle: "ReactJS Webinar",
     category: "Webinars",
     description: "Join our expert-led ReactJS webinar covering hooks and performance optimization.",
     date: "March 25, 2025",
@@ -18,7 +18,7 @@ const EventData = [
   },
   {
     id: 2,
-    title: "Hackathon 2025",
+    etitle: "Hackathon 2025",
     category: "Technical",
     description: "Code your heart out in our 24-hour hackathon.",
     date: "April 10, 2025",
@@ -26,7 +26,7 @@ const EventData = [
   },
   {
     id: 3,
-    title: "Dance Fiesta",
+    etitle: "Dance Fiesta",
     category: "Cultural",
     description: "Show your moves at our colorful cultural dance event.",
     date: "April 20, 2025",
@@ -34,7 +34,7 @@ const EventData = [
   },
   {
     id: 4,
-    title: "Python Workshop",
+    etitle: "Python Workshop",
     category: "Workshops",
     description: "Hands-on Python programming workshop for beginners.",
     date: "March 30, 2025",
@@ -42,7 +42,7 @@ const EventData = [
   },
   {
     id: 5,
-    title: "Sports Meet 2025",
+    etitle: "Sports Meet 2025",
     category: "Sports",
     description: "Compete in multiple sports activities and win prizes.",
     date: "May 5, 2025",
@@ -57,7 +57,7 @@ const Event = () => {
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [showRegistrationModal, setShowRegistrationModal] = useState(false);
   const [formData, setFormData] = useState({
-    title: '',
+    etitle: '',
     category: '',
     description: '',
     date: '',
@@ -70,7 +70,7 @@ const Event = () => {
   const filteredEvents = EventData.filter((event) => {
     const matchesCategory = selectedCategory === "All" || event.category === selectedCategory;
     const matchesSearch =
-      event.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      event.etitle.toLowerCase().includes(searchQuery.toLowerCase()) ||
       event.description.toLowerCase().includes(searchQuery.toLowerCase());
     return matchesCategory && matchesSearch;
   });
@@ -90,7 +90,7 @@ const Event = () => {
 
   const handleRegister = (e) => {
     e.preventDefault();
-    console.log("Registered for:", selectedEvent.title, "by", registrationData.name);
+    console.log("Registered for:", selectedEvent.etitle, "by", registrationData.name);
     setShowModal(false);
   };
 
@@ -107,7 +107,7 @@ const Event = () => {
     console.log("Event Created by:", formData.uploader);
     console.log("Event Data:", formData);
     // Future connection to database or file upload
-    setShowModal(false);
+    setShowCreateModal(false);
   };
 
   
@@ -164,12 +164,12 @@ const Event = () => {
             >
               <img
                 src={event.image}
-                alt={event.title}
+                alt={event.etitle}
                 className="w-full h-48 object-cover"
               />
               <div className="p-6 text-left">
                 <h3 className="text-2xl font-bold text-gray-800 mb-2 hover:text-blue-600 transition duration-300">
-                  {event.title}
+                  {event.etitle}
                 </h3>
                 <p className="text-gray-600 text-base font-medium mb-4 leading-relaxed">
                   {event.description}
@@ -227,16 +227,16 @@ const Event = () => {
 
   <div className="space-y-5">
     {/* Event Title */}
-    <div className="relative group">
-      <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-500 to-blue-500 rounded-xl blur opacity-10 group-hover:opacity-20 transition duration-300"></div>
+     <div className="relative group">
+      <div className="absolute -inset-0.5 bg-gradient-to-r from-purple-500 to-blue-500 rounded-xl blur opacity-10 group-hover:opacity-20 transition duration-300 z-0"></div>
       <input
         type="text"
-        name="title"
+        name="etitle"
         placeholder="Event Title"
         required
         onChange={handleFormDataChange}
-        className="w-full border-2 border-gray-200 px-6 py-3.5 rounded-xl bg-white focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-100 placeholder-gray-400 text-gray-700 font-medium transition-all"
-      />
+        className="relative z-10 w-full border-2 border-gray-200 px-6 py-3.5 rounded-xl bg-white focus:outline-none focus:border-purple-500 focus:ring-2 focus:ring-purple-100 placeholder-gray-400 text-gray-700 font-medium transition-all"
+      ></input>
     </div>
 
     {/* Category Select */}
@@ -371,7 +371,7 @@ const Event = () => {
             </svg>
           </div>
           <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-2 font-poppins"> {/* Responsive text */}
-            Join {selectedEvent.title}
+            Join {selectedEvent.etitle}
           </h2>
           <p className="text-gray-500 text-xs md:text-sm">Enter your details to register</p> {/* Responsive text */}
         </div>
@@ -432,14 +432,14 @@ const Event = () => {
           <div className="w-10 h-10 md:w-12 md:h-12 rounded-lg overflow-hidden"> {/* Responsive image */}
             <Image
               src={selectedEvent.image}
-              alt={selectedEvent.title}
+              alt={selectedEvent.etitle}
               width={48}
               height={48}
               className="object-cover w-full h-full"
             />
           </div>
           <div>
-            <h4 className="text-xs md:text-sm font-semibold text-gray-800">{selectedEvent.title}</h4> {/* Responsive text */}
+            <h4 className="text-xs md:text-sm font-semibold text-gray-800">{selectedEvent.etitle}</h4> {/* Responsive text */}
             <p className="text-[0.65rem] md:text-xs text-gray-500">{selectedEvent.date}</p> {/* Responsive text */}
           </div>
         </div>
